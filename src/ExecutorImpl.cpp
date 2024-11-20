@@ -20,11 +20,13 @@ namespace adas
             }
             else if (cmd == 'L')
             {
-                TurnLeft();
+                std::unique_ptr<TurnLeftCommand> cmder = std::make_unique<TurnLeftCommand>();
+                cmder->DoOperate(*this);
             }
             else if (cmd == 'R')
             {
-                TurnRight();
+                std::unique_ptr<TurnRightCommand> cmder = std::make_unique<TurnRightCommand>();
+                cmder->DoOperate(*this);
             }
         }
     }
