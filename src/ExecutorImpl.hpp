@@ -17,11 +17,14 @@ namespace adas
 
         private:
             Pose pose;
+            bool fast{false};
 
             void Move(void) noexcept;
             void TurnLeft(void) noexcept;
             void TurnRight(void) noexcept;
-
+            void Fast(void) noexcept;
+            bool IsFast(void) const noexcept;
+    
             class ICommand
             {
             public:
@@ -31,18 +34,43 @@ namespace adas
             class MoveCommand final : public ICommand
             {
             public:
-                void DoOperate(ExecutorImpl& executor) const noexcept override;
+                void DoOperate(ExecutorImpl& executor) const noexcept override
+                {
+                    if (executor.IsFast()) {
+                        executor.Move();
+                    }
+                    executor.Move();
+                }   
             };
             class TurnLeftCommand final : public ICommand
             {
             public:
-                void DoOperate(ExecutorImpl& executor) const noexcept override;
+                void DoOperate(ExecutorImpl& executor) const noexcept override
+                {
+                    if (executor.IsFast()) {
+                        executor.Move();
+                    }
+                    executor.TurnLeft();
+                }
             };
             class TurnRightCommand final : public ICommand
             {
             public:
-                void DoOperate(ExecutorImpl& executor) const noexcept override;
+                void DoOperate(ExecutorImpl& executor) const noexcept override
+                {
+                    if (executor.IsFast()) {
+                        executor.Move();
+                    }
+                    executor.TurnRight();
+                }
+            };
+            class FastCommand final : public ICommand
+            {
+            public:
+                void DoOperate(ExecutorImpl& executor) const noexcept override
+                {
+                    executor.Fast();
+                }
             };
     };
 }  // namespace adas
-

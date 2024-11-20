@@ -9,20 +9,6 @@ namespace adas
     ExecutorImpl::ExecutorImpl(const Pose& pose) noexcept : pose(pose)
     {
     }
-    void ExecutorImpl::MoveCommand::DoOperate(ExecutorImpl& executor) const noexcept
-    {
-        executor.Move();
-    }
-
-    void ExecutorImpl::TurnLeftCommand::DoOperate(ExecutorImpl& executor) const noexcept
-    {
-        executor.TurnLeft();
-    }
-
-    void ExecutorImpl::TurnRightCommand::DoOperate(ExecutorImpl& executor) const noexcept
-    {
-        executor.TurnRight();
-    }
     void ExecutorImpl::Execute(const std::string& commands) noexcept
     {
         for (const auto cmd : commands)
@@ -39,6 +25,10 @@ namespace adas
             else if (cmd == 'R')
             {
                 cmder = std::make_unique<TurnRightCommand>();
+            }
+            else if (cmd == 'F')
+            {
+                cmder = std::make_unique<FastCommand>();
             }
             if (cmder) {
                 cmder->DoOperate(*this);
@@ -95,6 +85,15 @@ namespace adas
         {
             pose.heading = 'W';
         }
+    }
+
+    void ExecutorImpl::Fast() noexcept
+    {
+        fast = !fast;
+    }
+    bool ExecutorImpl::IsFast() const noexcept
+    {
+    return fast;
     }
 
     Pose ExecutorImpl::Query() const noexcept
