@@ -17,6 +17,8 @@ public:
 
 private:
     Pose pose;
+private:
+    void Move(void) noexcept;
 };
 }  // namespace adas
 
