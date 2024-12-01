@@ -15,15 +15,16 @@ namespace adas
             void Execute(const std::string& command) noexcept override;
             Pose Query(void) const noexcept override;
 
-        private:
-            Pose pose;
-            bool fast{false};
-
+        public:
             void Move(void) noexcept;
             void TurnLeft(void) noexcept;
             void TurnRight(void) noexcept;
             void Fast(void) noexcept;
             bool IsFast(void) const noexcept;
+
+        private:
+            Pose pose;
+            bool fast{false};
     
             class ICommand
             {
