@@ -142,6 +142,31 @@ ActionGroup operator()(PoseHandler& poseHandler) const noexcept
     poseHandler.Reverse();
     return ActionGroup();
 };
+};
 
+class TurnRoundCommand final
+{
+public:
+    ActionGroup operator()(PoseHandler& poseHandler) const noexcept
+    {
+        if (poseHandler.IsReverse()) {
+            return ActionGroup();
+        }
+
+        if (poseHandler.IsFast()) {
+            return ActionGroup({
+                ActionType::FORWARD_1_STEP_ACTION,
+                ActionType::TURNLEFT_ACTION,
+                ActionType::FORWARD_1_STEP_ACTION,
+                ActionType::TURNLEFT_ACTION
+            });
+        }
+
+        return ActionGroup({
+            ActionType::TURNLEFT_ACTION,
+            ActionType::FORWARD_1_STEP_ACTION,
+            ActionType::TURNLEFT_ACTION
+        });
+    }
 };
 } // namespace adas
