@@ -20,12 +20,13 @@ public:
     //     }
     //     poseHandler.Move();
     // }
-    const std::function<void(PoseHandler& poseHandler)> operate = [](PoseHandler& poseHandler) noexcept {
+    void operator()(PoseHandler& poseHandler) const noexcept
+    {
         if (poseHandler.IsFast()) {
             poseHandler.Move();
         }
         poseHandler.Move();
-    };
+    }
 };
 
 class TurnLeftCommand final //: public ICommand
@@ -38,12 +39,13 @@ public:
     //     }
     //     poseHandler.TurnLeft();
     // }
-    const std::function<void(PoseHandler& poseHandler)> operate = [](PoseHandler& poseHandler) noexcept {
+     void operator()(PoseHandler& poseHandler) const noexcept
+    {
         if (poseHandler.IsFast()) {
             poseHandler.Move();
         }
         poseHandler.TurnLeft();
-    };
+    }
 };
 
 class TurnRightCommand final //: public ICommand
@@ -56,12 +58,13 @@ public:
     //     }
     //     poseHandler.TurnRight();
     // }
-    const std::function<void(PoseHandler& poseHandler)> operate = [](PoseHandler& poseHandler) noexcept {
+     void operator()(PoseHandler& poseHandler) const noexcept
+    {
         if (poseHandler.IsFast()) {
             poseHandler.Move();
         }
         poseHandler.TurnRight();
-    };
+    }
 };
 
 class FastCommand final //: public ICommand
@@ -71,9 +74,10 @@ public:
     // {
     //     poseHandler.Fast();
     // }
-    const std::function<void(PoseHandler& poseHandler)> operate = [](PoseHandler& poseHandler) noexcept {
+    void operator()(PoseHandler& poseHandler) const noexcept
+    {
         poseHandler.Fast();
-    };
+    }
 };
 
 } // namespace adas
