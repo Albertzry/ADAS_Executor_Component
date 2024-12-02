@@ -22,9 +22,6 @@ public:
     // }
     void operator()(PoseHandler& poseHandler) const noexcept
     {
-        if (poseHandler.IsFast()) {
-            poseHandler.Move();
-        }
         poseHandler.Move();
     }
 };
@@ -41,11 +38,9 @@ public:
     // }
      void operator()(PoseHandler& poseHandler) const noexcept
     {
-        if (poseHandler.IsFast()) {
-            poseHandler.Move();
-        }
         poseHandler.TurnLeft();
     }
+
 };
 
 class TurnRightCommand final //: public ICommand
@@ -60,9 +55,6 @@ public:
     // }
      void operator()(PoseHandler& poseHandler) const noexcept
     {
-        if (poseHandler.IsFast()) {
-            poseHandler.Move();
-        }
         poseHandler.TurnRight();
     }
 };
@@ -79,5 +71,15 @@ public:
         poseHandler.Fast();
     }
 };
+
+class ReverseCommand final
+{
+public:
+    void operator()(PoseHandler& poseHandler) const noexcept
+    {
+        poseHandler.Reverse();
+    }
+};
+
 
 } // namespace adas
