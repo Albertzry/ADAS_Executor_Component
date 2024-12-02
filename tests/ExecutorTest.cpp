@@ -3,6 +3,8 @@
 // #include <tuple>
 #include "Executor.hpp"
 #include "PoseEq.hpp"
+#include <iostream>
+using namespace std;
 namespace adas
 {
 // bool operator==(const Pose& lhs, const Pose& rhs)

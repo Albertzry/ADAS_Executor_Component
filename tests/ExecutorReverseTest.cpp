@@ -25,6 +25,9 @@ TEST(ExecutorReverseTest, should_return_S_given_status_is_reverse_command_is_BL_
     executor->Execute("BL");
     // then
     const Pose target{0, 0, 'S'};
+    cout<<executor->Query().x<<endl;
+    cout<<executor->Query().y<<endl;
+    cout<<executor->Query().heading<<endl;
     ASSERT_EQ(target, executor->Query());
 }
 
@@ -46,6 +49,9 @@ TEST(ExecutorReverseTest, should_return_N__x_minus_1_given_command_is_BFR_and_fa
     executor->Execute("BFR");
     // then
     const Pose target{-1, 0, 'N'};
+    cout<<executor->Query().x<<endl;
+    cout<<executor->Query().y<<endl;
+    cout<<executor->Query().heading<<endl;
     ASSERT_EQ(target, executor->Query());
 }  // namespace adas
 }

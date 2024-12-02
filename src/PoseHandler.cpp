@@ -9,47 +9,18 @@ PoseHandler::PoseHandler(const Pose& pose) noexcept
 
 void PoseHandler::Move() noexcept
 {
-    if (reverse) {
-        point -= facing->Move();
-        if (fast) {
-            point -= facing->Move();
-        }
-    } else {
-        point += facing->Move();
-        if (fast) {
-            point += facing->Move();
-        }
-    }
+    point += facing->Move();
 }
 
 void PoseHandler::TurnLeft() noexcept
 {
-    if (reverse) {
-        if (fast) {
-            point -= facing->Move();
-        }
-        facing = &(facing->RightOne());
-    } else {
-        if (fast) {
-            point += facing->Move();
-        }
-        facing = &(facing->LeftOne());
-    }
+    facing = &(facing->LeftOne());
+
 }
 
 void PoseHandler::TurnRight() noexcept
 {
-    if (reverse) {
-        if (fast) {
-            point -= facing->Move();
-        }
-        facing = &(facing->LeftOne());
-    } else {
-        if (fast) {
-            point += facing->Move();
-        }
-        facing = &(facing->RightOne());
-    }
+    facing = &(facing->RightOne());
 }
 
 void PoseHandler::Fast() noexcept

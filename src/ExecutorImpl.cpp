@@ -32,9 +32,16 @@ namespace adas
         //         it->second(poseHandler);
         //     }
         // }
-        const auto cmders = Singleton<CmderFactory>::Instance().GetCmders(commands);
+
+        // const auto cmders = Singleton<CmderFactory>::Instance().GetCmders(commands);
         
-        std::for_each(cmders.begin(), cmders.end(), [this](const Cmder& cmder) noexcept { cmder(poseHandler); });
+        // std::for_each(cmders.begin(), cmders.end(), [this](const Cmder& cmder) noexcept { cmder(poseHandler); });
+        const auto cmders = Singleton<CmderFactory>::Instance().GetCmders(commands);
+
+        std::for_each(cmders.begin(), cmders.end(),
+            [this](const Cmder& cmder) noexcept { cmder(poseHandler).DoOperate(poseHandler); });
+
+
     }
 
     Pose ExecutorImpl::Query() const noexcept

@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "Executor.hpp"
 #include "PoseEq.hpp"
+#include <iostream>
+using namespace std;
 namespace adas
 {
 TEST(ExecutorFastTest, should_return_x_plus_2_given_status_is_fast_command_is_M_and_facing_is_E)
