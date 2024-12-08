@@ -22,6 +22,8 @@ public:
     bool IsReverse(void) const noexcept;
     void Forward(void) noexcept;
     void Backward(void) noexcept;
+    void Bus(void) noexcept;
+    bool IsBus(void) const noexcept;
 
 
 private:
@@ -30,6 +32,6 @@ private:
     Point point;
     const Direction* facing;
     bool reverse{false};
-
+    bool bus{false};
 };
 }  // namespace adas

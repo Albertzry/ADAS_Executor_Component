@@ -79,6 +79,15 @@ public:
     }
 };
 
+class BeBusAction final
+{
+public:
+    void operator()(PoseHandler& poseHandler) const noexcept
+    {
+        poseHandler.Bus();
+    }
+};
+
 ActionGroup::ActionGroup(const std::list<ActionType>& actions) noexcept : actions(actions)
 {
 }
@@ -91,7 +100,7 @@ void ActionGroup::DoOperate(PoseHandler& poseHandler) const noexcept
 {
      static std::vector<std::function<void(PoseHandler&)>> actionVec = {
         ForwardAction(),BackwardAction(),TurnLeftAction(),ReverseTurnLeftAction(),
-        TurnRightAction(), ReverseTurnRightAction(), BeFaseAction(), BeReverseAction(), 
+        TurnRightAction(), ReverseTurnRightAction(), BeFaseAction(), BeReverseAction(), BeBusAction(),
     };
     std::for_each(actions.begin(), actions.end(), [&poseHandler](const ActionType actionType) mutable noexcept {
     actionVec[static_cast<uint16_t>(actionType)](poseHandler);

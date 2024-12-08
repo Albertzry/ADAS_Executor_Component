@@ -57,4 +57,14 @@ bool PoseHandler::IsReverse() const noexcept
 {
     return reverse;
 }
+
+void adas::PoseHandler::Bus() noexcept
+{
+    bus = !bus;
+}
+
+bool adas::PoseHandler::IsBus() const noexcept
+{
+    return bus;
+}
 }  // namespace adas

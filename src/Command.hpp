@@ -36,7 +36,9 @@ ActionGroup operator()(PoseHandler& poseHandler) const noexcept
     if (poseHandler.IsFast()) {
         actionGroup.PushAction(action);
     }
-
+    if (!poseHandler.IsBus()) {
+        actionGroup.PushAction(action);
+    }
     actionGroup.PushAction(action);
     return actionGroup;
 }
@@ -61,7 +63,9 @@ ActionGroup operator()(PoseHandler& poseHandler) const noexcept
     ActionGroup actionGroup;
     const auto action =
         poseHandler.IsReverse() ? ActionType::REVERSE_TURNLEFT_ACTION : ActionType::TURNLEFT_ACTION;
-
+    if (poseHandler.IsBus()) {
+        actionGroup.PushAction(ActionType::FORWARD_1_STEP_ACTION);
+    }
     if (poseHandler.IsFast()) {
         if (poseHandler.IsReverse()) {
             actionGroup.PushAction(ActionType::BACKWARD_1_STEP_ACTION);
@@ -70,8 +74,10 @@ ActionGroup operator()(PoseHandler& poseHandler) const noexcept
             actionGroup.PushAction(ActionType::FORWARD_1_STEP_ACTION);
         }
     }
-
     actionGroup.PushAction(action);
+    if (!poseHandler.IsBus()) {
+        actionGroup.PushAction(ActionType::FORWARD_1_STEP_ACTION);
+    }
     return actionGroup;
 }
 };
@@ -96,7 +102,9 @@ ActionGroup operator()(PoseHandler& poseHandler) const noexcept
     ActionGroup actionGroup;
     const auto action =
         poseHandler.IsReverse() ? ActionType::REVERSE_TURNRIGHT_ACTION : ActionType::TURNRIGHT_ACTION;
-
+    if (poseHandler.IsBus()) {
+        actionGroup.PushAction(ActionType::FORWARD_1_STEP_ACTION);
+    }
     if (poseHandler.IsFast()) {
         if(poseHandler.IsReverse()) {
             actionGroup.PushAction(ActionType::BACKWARD_1_STEP_ACTION);
@@ -107,6 +115,9 @@ ActionGroup operator()(PoseHandler& poseHandler) const noexcept
     }
 
     actionGroup.PushAction(action);
+    if (!poseHandler.IsBus()) {
+    actionGroup.PushAction(ActionType::FORWARD_1_STEP_ACTION);
+    }
     return actionGroup;
 }
 };
@@ -167,6 +178,15 @@ public:
             ActionType::FORWARD_1_STEP_ACTION,
             ActionType::TURNLEFT_ACTION
         });
+    }
+};
+class BeBusCommand final
+{
+public:
+    ActionGroup operator()(PoseHandler& poseHandler) const noexcept
+    {
+        poseHandler.Bus();
+        return ActionGroup();
     }
 };
 } // namespace adas

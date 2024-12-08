@@ -14,6 +14,7 @@ enum class ActionType : uint16_t {
     REVERSE_TURNRIGHT_ACTION,
     BE_FAST_ACTION,
     BE_REVERSE_ACTION,
+    BE_BUS_ACTION,
 };
 
 class ActionGroup final

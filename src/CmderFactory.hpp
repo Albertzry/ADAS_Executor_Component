@@ -35,6 +35,7 @@ private:
         {'F', FastCommand()},
         {'B', ReverseCommand()},
         {'Z', TurnRoundCommand()},
+        {'C', BeBusCommand()},
     };
 };
 }  // namespace adas
